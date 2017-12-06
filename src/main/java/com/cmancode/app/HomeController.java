@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,13 +53,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "cliente", method = RequestMethod.POST)
-	public String saveClient(@Valid Cliente cliente, BindingResult result) {
+	public ModelAndView saveClient(@Valid Cliente cliente, BindingResult result, ModelAndView model) {
 		
 		if(result.hasErrors()) {
-			return "cliente";
+			model.addObject("encabezado", "Nuevo Cliente");
+			model.addObject("boton", "Registrar cliente");
+			model.setViewName("cliente");
+			return model;
 		}
+		model.setViewName("redirect: lista");
 		clienteService.saveClient(cliente);		
-		return "redirect:lista";
+		return model;
 	}
 	
 	@RequestMapping(value = {"/", "/lista"}, method = RequestMethod.GET)
