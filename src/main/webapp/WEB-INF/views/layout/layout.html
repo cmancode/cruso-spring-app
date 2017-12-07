@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{resources/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{resources/css/estilos.css}" />
+<title>Spring MVC</title>
+</head>
+<body>
+	<header th:fragment="header">
+		<nav
+			class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Curso Spring</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" th:href="@{/cliente}">Nuevo
+							Cliente</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/lista}">Clientes</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div class="container"></div>
+
+	<footer th:fragment="footer" class="container"> 
+		<hr/>
+		<img style="width: 15%;" alt="Spring MVC" th:src="@{resources/img/spring.png}"/>
+		<p style="text-decoration: none;">
+			Powered by <a href="https://spring.io">Spring MVC</a>
+			and <a href="http://www.thymeleaf.org">Thymeleaf</a>
+		</p>
+		<p>
+			Un proyecto desarrollado por Carlos Albeto Mantilla con tecnologías web que facilitan
+			la <br/>implementación del patrón arquitectónico MVC. Taler como Spring MVC, Hibernate.
+			<br/>Como IDE se utilizó STS - Eclipse Oxygen.
+		</p>
+	</footer>
+
+</body>
+</html>

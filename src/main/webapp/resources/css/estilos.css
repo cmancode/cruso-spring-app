@@ -5,3 +5,15 @@ label {
 .table td {
 	vertical-align: inherit;
 }
+
+#new-client {
+	margin-bottom: 4px; 
+}
+
+#main-container {
+	margin-top: 2%;
+}
+
+footer {
+	margin-bottom: 0;
+}
