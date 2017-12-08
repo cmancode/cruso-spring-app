@@ -1,6 +1,5 @@
 package com.cmancode.app;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cmancode.app.model.Cliente;
 import com.cmancode.app.service.IClienteService;
@@ -53,26 +51,24 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "cliente", method = RequestMethod.POST)
-	public ModelAndView saveClient(@Valid Cliente cliente, BindingResult result, ModelAndView model) {
+	public String saveClient(@Valid Cliente cliente, BindingResult result, RedirectAttributes flash, Model model) {
 		
 		if(result.hasErrors()) {
-			model.addObject("encabezado", "Nuevo Cliente");
-			model.addObject("boton", "Registrar cliente");
-			model.setViewName("cliente");
-			return model;
+			model.addAttribute("encabezado", "Nuevo Cliente");
+			model.addAttribute("boton", "Registrar cliente");
+			return "cliente";
 		}
-		model.setViewName("redirect: lista");
-		clienteService.saveClient(cliente);		
-		return model;
+		clienteService.saveClient(cliente);
+		flash.addFlashAttribute("success", "Información registrada con éxito!");	
+		return "redirect:lista";
 	}
 	
 	@RequestMapping(value = {"/", "/lista"}, method = RequestMethod.GET)
-	public ModelAndView listar(ModelAndView model) {
+	public String listar(Model model) {
 		List<Cliente> clientes = null;
 		clientes = clienteService.findAllClient();
-		model.addObject("lista", clientes);
-		model.setViewName("lista");
-		return model;
+		model.addAttribute("lista", clientes);
+		return "lista";
 	}
 	
 }

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"></head>
 <body>
 
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
+	<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
 		<div class="card bg-light">
 			<div class="card-header">Lista de Clientes</div>
 			<div class="card-body">
@@ -28,7 +29,7 @@
 							<td th:text="${cliente.apellido}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.fecha}"></td>
-							<td><a class="btn btn-primary btn-xs"
+							<td id="td-buttons"><a id="editar" class="btn btn-primary btn-xs"
 								th:href="@{/cliente/}+ ${cliente.id}">Editar</a></td>
 						</tr>
 					</tbody>
